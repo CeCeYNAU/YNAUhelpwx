@@ -1,0 +1,36 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">校园一角</text>
+    <text class="page-subtitle">用镜头记录云农之美</text>
+  </view>
+
+  <view class="publish-btn" bindtap="goPublish">
+    <text class="publish-icon-emoji"></text>
+    <text>上传照片</text>
+  </view>
+
+  <view class="empty-state" wx:if="{{list.length === 0}}">
+    <text class="empty-icon">📸</text>
+    <text class="empty-text">还没有照片，来做第一个记录者吧</text>
+  </view>
+
+  <view class="photo-grid">
+    <view class="photo-card" wx:for="{{list}}" wx:key="id" bindtap="goDetail" data-index="{{index}}">
+      <image
+        class="photo-img"
+        src="{{item.imagePath}}"
+        mode="aspectFill"
+        bindtap="previewImage"
+        data-index="{{index}}"
+      />
+      <view class="photo-info">
+        <text class="photo-title">{{item.title}}</text>
+        <view class="photo-meta">
+          <text class="photo-author">{{item.authorName}}</text>
+          <text class="photo-views">{{item._views}} 浏览</text>
+          <text class="photo-delete" wx:if="{{userInfo && item.authorId === userInfo.studentId}}" catchtap="deleteItem" data-id="{{item.id}}">删除</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

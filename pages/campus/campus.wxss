@@ -1,0 +1,168 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.page-header {
+  background: linear-gradient(135deg, #2E7D32, #4CAF50);
+  color: #fff;
+  padding: 48rpx 28rpx 36rpx;
+}
+
+.page-title {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: #fff;
+}
+
+.page-subtitle {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 6rpx;
+  display: block;
+}
+
+.scroll-area {
+  height: calc(100vh - 200rpx);
+}
+
+.service-section {
+  padding: 28rpx;
+}
+
+.service-group-title {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+/* 核心服务网格 */
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: 24rpx;
+  padding: 28rpx 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
+}
+
+.service-card:active {
+  transform: scale(0.97);
+}
+
+.service-icon-box {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+.service-card:active .service-icon-box {
+  transform: scale(0.88);
+}
+
+.service-emoji {
+  font-size: 48rpx;
+  line-height: 1;
+}
+
+.service-icon-img {
+  width: 64%;
+  height: 64%;
+}
+
+.service-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.service-desc {
+  font-size: 22rpx;
+  color: var(--gray);
+}
+
+/* 更多服务列表 */
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.service-list-item {
+  background: var(--white);
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.03);
+}
+
+.service-list-item:active {
+  background: var(--paper);
+}
+
+.service-list-icon {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.service-list-item:active .service-list-icon {
+  transform: scale(0.9);
+}
+
+.service-list-emoji {
+  font-size: 36rpx;
+  line-height: 1;
+}
+
+.service-list-icon-img {
+  width: 60%;
+  height: 60%;
+}
+
+.service-list-info {
+  flex: 1;
+}
+
+.service-list-name {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink);
+  display: block;
+}
+
+.service-list-desc {
+  font-size: 22rpx;
+  color: var(--gray);
+  display: block;
+  margin-top: 4rpx;
+}
+
+.service-list-arrow {
+  font-size: 28rpx;
+  color: var(--gray);
+}

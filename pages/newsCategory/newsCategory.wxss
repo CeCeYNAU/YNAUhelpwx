@@ -1,0 +1,66 @@
+.news-page { min-height: 100vh; background: var(--bg); padding-bottom: 40rpx; }
+
+.page-header {
+  background: linear-gradient(135deg, #D4A017, #FFD54F);
+  color: #fff; padding: 48rpx 28rpx 36rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Abstract geometric background overlay */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ui-images/土包楼.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  z-index: 0;
+  animation: bgZoom 23s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes bgZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.page-title { font-size: 40rpx; font-weight: 800; color: #fff; position: relative; z-index: 1; }
+.page-subtitle { font-size: 24rpx; color: rgba(255,255,255,0.75); margin-top: 6rpx; display: block; position: relative; z-index: 1; }
+
+.category-bar { display: flex; gap: 12rpx; padding: 20rpx 28rpx; white-space: nowrap; }
+
+.cat-item {
+  display: inline-block; padding: 10rpx 24rpx; border-radius: 24rpx;
+  font-size: 24rpx; color: var(--ink-light); background: var(--white); font-weight: 500; flex-shrink: 0;
+}
+
+.cat-item.active { background: #D4A017; color: #fff; font-weight: 600; }
+
+.search-bar { padding: 0 28rpx 20rpx; }
+.search-input { background: var(--white); border-radius: 28rpx; padding: 14rpx 24rpx; font-size: 26rpx; }
+
+.news-list { height: calc(100vh - 280rpx); }
+.list-wrap { padding: 0 28rpx; }
+
+.news-item {
+  background: var(--white); border-radius: 16rpx; padding: 24rpx;
+  margin-bottom: 12rpx; box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.03);
+}
+
+.news-item:active { background: var(--paper); }
+
+.news-tag {
+  display: inline-block; padding: 4rpx 12rpx; border-radius: 8rpx;
+  font-size: 20rpx; color: #fff; background: var(--green);
+  font-weight: 600; margin-bottom: 8rpx;
+}
+
+.news-title { font-size: 28rpx; font-weight: 600; color: var(--ink); display: block; margin-bottom: 6rpx; }
+.news-desc { font-size: 24rpx; color: var(--ink-light); display: block; margin-bottom: 10rpx; }
+.news-time { font-size: 22rpx; color: var(--gray); }
+
+.empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100rpx 40rpx; animation: fadeIn 0.5s ease; }
+.empty-icon-img { width: 120rpx; height: 120rpx; margin-bottom: 24rpx; opacity: 0.5; }
+.empty-icon { font-size: 100rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 28rpx; color: var(--gray); }

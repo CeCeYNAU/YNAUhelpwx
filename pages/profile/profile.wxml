@@ -1,0 +1,105 @@
+<view class="page profile-page">
+  <!-- 用户信息卡片 -->
+  <view class="user-card" wx:if="{{isLoggedIn}}">
+    <view class="user-bg">
+      <view class="decor-circle-1"></view>
+      <view class="decor-circle-2"></view>
+    </view>
+    <view class="user-info">
+      <image class="user-avatar" src="{{_avatarUrl}}" mode="aspectFill" />
+      <view class="user-detail">
+        <text class="user-name">{{userInfo.nickName}}</text>
+        <text class="user-id">学号: {{userInfo.studentId}}</text>
+        <text class="user-college" wx:if="{{userInfo.college}}">{{userInfo.college}}</text>
+      </view>
+    </view>
+    <view class="edit-btn" bindtap="showEditModal">
+      <text>编辑资料</text>
+    </view>
+  </view>
+
+  <!-- 未登录 -->
+  <view class="user-card" wx:else>
+    <view class="user-bg">
+      <view class="decor-circle-1"></view>
+      <view class="decor-circle-2"></view>
+    </view>
+    <view class="guest-info" bindtap="goLogin">
+      <text class="guest-text">点击登录</text>
+      <text class="guest-sub">享受完整校园服务</text>
+    </view>
+  </view>
+
+  <!-- 统计数据 -->
+  <view class="stats-bar" wx:if="{{isLoggedIn}}">
+    <view class="stat" bindtap="goTodo">
+      <text class="stat-num">{{todoCount}}</text>
+      <text class="stat-label">待办</text>
+    </view>
+    <view class="stat" bindtap="goLostFound">
+      <text class="stat-num">{{lfCount}}</text>
+      <text class="stat-label">失物招领</text>
+    </view>
+    <view class="stat">
+      <text class="stat-num">{{sceneryCount}}</text>
+      <text class="stat-label">风景</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goTodo">
+      <image class="menu-icon" src="/images/icons/todo.png" mode="aspectFit" />
+      <text class="menu-name">我的待办</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goLostFound">
+      <image class="menu-icon" src="/images/icons/lostfound.png" mode="aspectFit" />
+      <text class="menu-name">失物招领</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goCourse">
+      <image class="menu-icon" src="/images/icons/course.png" mode="aspectFit" />
+      <text class="menu-name">我的课表</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goNews">
+      <image class="menu-icon" src="/images/icons/news.png" mode="aspectFit" />
+      <text class="menu-name">校园资讯</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 关于与隐私 -->
+  <view class="menu-section">
+    <view class="menu-item" bindtap="goPrivacy">
+      <image class="menu-icon" src="/images/icons/lock.png" mode="aspectFit" />
+      <text class="menu-name">隐私政策</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 退出登录 -->
+  <view class="logout-wrap" wx:if="{{isLoggedIn}}">
+    <button class="logout-btn" bindtap="logout">退出登录</button>
+  </view>
+
+  <!-- 编辑弹窗 -->
+  <view class="modal" wx:if="{{showEdit}}" bindtap="hideEditModal">
+    <view class="modal-box" catchtap="stop">
+      <text class="modal-title">编辑资料</text>
+      <view class="modal-input">
+        <text class="modal-label">昵称</text>
+        <input class="modal-field" placeholder="请输入昵称" value="{{editName}}" bindinput="onNameInput" />
+      </view>
+      <view class="modal-input">
+        <text class="modal-label">学院</text>
+        <input class="modal-field" placeholder="请输入学院" value="{{editCollege}}" bindinput="onCollegeInput" />
+      </view>
+      <view class="modal-btns">
+        <button class="modal-cancel" bindtap="hideEditModal">取消</button>
+        <button class="modal-confirm" bindtap="saveProfile">保存</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,165 @@
+.lf-page {
+  min-height: 100vh;
+  background: var(--bg);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  position: relative;
+}
+
+.page-header {
+  background: linear-gradient(135deg, #1565C0 0%, #2196F3 40%, #42A5F5 70%, #64B5F6 100%);
+  color: #fff;
+  padding: 48rpx 28rpx 36rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Abstract geometric background overlay */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/ui-images/樱花防御塔.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  z-index: 0;
+  animation: bgZoom 25s ease-in-out infinite alternate;
+}
+
+@keyframes bgZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+
+.page-title { font-size: 40rpx; font-weight: 800; color: #fff; position: relative; z-index: 1; }
+.page-subtitle { font-size: 24rpx; color: rgba(255,255,255,0.75); margin-top: 6rpx; display: block; position: relative; z-index: 1; }
+
+/* 搜索栏 - 加大圆角 */
+.search-bar { padding: 20rpx 28rpx; }
+
+.search-input {
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 48rpx;
+  padding: 18rpx 32rpx;
+  font-size: 28rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.06);
+  border: 2rpx solid transparent;
+  transition: all 0.2s;
+}
+
+.search-input:focus {
+  background: #fff;
+  border-color: #2196F3;
+  box-shadow: 0 4rpx 16rpx rgba(33,150,243,0.1);
+}
+
+/* 分类标签 */
+.tabs { display: flex; gap: 16rpx; padding: 0 28rpx 20rpx; }
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 14rpx 0;
+  border-radius: 28rpx;
+  font-size: 26rpx;
+  color: var(--ink-light);
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.tab:active { transform: scale(0.95); }
+.tab.active { background: #2196F3; color: #fff; font-weight: 600; }
+
+.list-scroll { height: calc(100vh - 340rpx); }
+.list-wrap { padding: 0 28rpx; }
+
+.lf-item {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+  border: 1rpx solid rgba(255,255,255,0.5);
+  position: relative;
+  transition: all 0.2s;
+}
+
+.lf-item:active { background: var(--paper); }
+
+.lf-info { padding-right: 40rpx; }
+
+.lf-header { display: flex; justify-content: space-between; margin-bottom: 10rpx; }
+
+.lf-title { font-size: 28rpx; font-weight: 600; color: var(--ink); flex: 1; }
+.lf-time { font-size: 20rpx; color: var(--gray); margin-left: 16rpx; }
+
+.lf-desc { font-size: 24rpx; color: var(--ink-light); line-height: 1.5; display: block; margin-bottom: 12rpx; }
+
+.lf-footer { display: flex; gap: 12rpx; flex-wrap: wrap; }
+.lf-tag {
+  font-size: 22rpx;
+  color: var(--ink-light);
+  background: rgba(0,0,0,0.04);
+  padding: 4rpx 14rpx;
+  border-radius: 16rpx;
+}
+
+.lf-del {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: #FFEBEE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lf-del:active {
+  background: var(--red);
+}
+
+.lf-del:active text { color: #fff; }
+
+.lf-del text { font-size: 28rpx; color: var(--red); font-weight: 700; }
+
+.fab-btn {
+  position: fixed;
+  bottom: 120rpx;
+  right: 40rpx;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2196F3, #42A5F5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(33,150,243,0.35);
+  z-index: 10;
+  transition: transform 0.2s;
+}
+
+.fab-btn text { font-size: 48rpx; color: #fff; font-weight: 300; }
+.fab-btn:active { transform: scale(0.9); }
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 40rpx;
+  animation: fadeIn 0.5s ease;
+}
+
+.empty-icon { font-size: 100rpx; margin-bottom: 20rpx; }
+.empty-text { font-size: 26rpx; color: var(--gray); }

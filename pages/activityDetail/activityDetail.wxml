@@ -1,0 +1,43 @@
+<view class="page" wx:if="{{activity}}">
+  <view class="detail-card glass-card">
+    <view class="detail-header">
+      <view class="detail-tag tag-{{activity._typeTag}}">{{activity._typeText}}</view>
+      <view class="detail-status status-{{activity._statusTag}}">
+        <text>{{activity._statusText}}</text>
+      </view>
+    </view>
+    <view class="detail-title">{{activity.title}}</view>
+    <view class="detail-info">
+      <view class="info-item">
+        <text class="info-icon">📅</text>
+        <text class="info-text">{{activity.date}} {{activity._startTime}} - {{activity._endTime}}</text>
+      </view>
+      <view class="info-item" wx:if="{{activity.location}}">
+        <text class="info-icon">📍</text>
+        <text class="info-text">{{activity.location}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-icon">👥</text>
+        <text class="info-text">{{activity._count}}/{{activity._maxPeopleText}}</text>
+      </view>
+      <view class="info-item" wx:if="{{activity.organizer}}">
+        <text class="info-icon">🏢</text>
+        <text class="info-text">主办方：{{activity.organizer}}</text>
+      </view>
+    </view>
+    <view class="detail-desc">
+      <text class="desc-title">活动详情</text>
+      <text class="desc-text">{{activity.content}}</text>
+    </view>
+    <view class="detail-author">
+      <text>发布者：{{activity._author}}</text>
+      <text class="publish-time">{{activity.time}}</text>
+    </view>
+  </view>
+
+  <view class="action-bar" wx:if="{{activity.status !== 'ended'}}">
+    <view class="signup-btn {{isParticipant ? 'signed' : ''}}" bindtap="toggleSignup">
+      <text>{{isParticipant ? '已报名 · 取消报名' : '立即报名'}}</text>
+    </view>
+  </view>
+</view>

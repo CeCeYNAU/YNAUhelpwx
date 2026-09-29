@@ -1,0 +1,138 @@
+<view class="login-page">
+  <!-- 摄影区域（使用抽象几何背景图） -->
+  <view class="photo-section">
+    <view class="photo-overlay"></view>
+    <view class="campus-building-bg"></view>
+  </view>
+
+  <!-- 抽象记忆面板 -->
+  <view class="abstract-panel">
+    <view class="panel-content">
+      <!-- 抽象装饰元素 -->
+      <view class="abstract-motif">
+        <view class="motif-bar bar-1"></view>
+        <view class="motif-bar bar-2"></view>
+        <view class="motif-dot dot-1"></view>
+        <view class="motif-dot dot-2"></view>
+        <view class="motif-line"></view>
+      </view>
+
+      <!-- 标题 -->
+      <view class="title-group">
+        <text class="main-title">Campus Memory</text>
+        <text class="sub-title">Where knowledge grows in green fields</text>
+      </view>
+
+      <!-- 微信授权按钮 -->
+      <button
+        class="auth-btn {{hasAvatar ? 'has-avatar' : ''}}"
+        open-type="chooseAvatar"
+        bindchooseavatar="onChooseAvatar"
+        bindtap="onAuthBtnTap"
+        hover-class="btn-hover"
+      >
+        <view class="btn-content" wx:if="{{!avatarUrl}}">
+          <text class="btn-icon">📷</text>
+          <text class="btn-text">点击授权微信头像</text>
+        </view>
+        <view class="avatar-preview-wrap" wx:else>
+          <image class="preview-avatar" src="{{avatarUrl}}" mode="aspectFill" />
+          <view class="avatar-check">✓</view>
+        </view>
+      </button>
+
+      <!-- 协议 -->
+      <view class="agree-row" bindtap="toggleAgree" hover-class="row-hover">
+        <view class="checkbox {{agreed ? 'checked' : ''}}">
+          <text class="check-mark" wx:if="{{agreed}}">✓</text>
+        </view>
+        <text class="agree-text">已阅读并同意</text>
+        <text class="agree-link" catchtap="goPrivacy">《隐私政策》</text>
+      </view>
+
+      <!-- 下一步 -->
+      <button
+        class="next-btn {{_canNext ? 'active' : ''}}"
+        bindtap="onChooseAvatarComplete"
+        disabled="{{!_canNext}}"
+        hover-class="btn-active"
+      >
+        <text>下一步</text>
+        <text class="arrow">→</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 步骤2: 表单 -->
+  <view class="form-overlay {{step === 2 ? 'show' : ''}}" wx:if="{{step === 2}}">
+    <view class="form-card">
+      <view class="form-header">
+        <view class="back-btn" bindtap="goBack" hover-class="back-hover">←</view>
+        <text class="form-title">绑定学号</text>
+      </view>
+
+      <view class="user-info-row">
+        <image class="mini-avatar" src="{{avatarUrl}}" mode="aspectFill" />
+        <view class="user-detail">
+          <text class="user-name">{{nickName || '同学'}}</text>
+          <text class="user-tip">填写学号完成绑定</text>
+        </view>
+      </view>
+
+      <view class="input-fields">
+        <view class="field {{_focusId ? 'focused' : ''}} {{studentId && validateId ? 'valid' : ''}}">
+          <text class="field-label">学号</text>
+          <input
+            class="field-input"
+            placeholder="请输入10位学号"
+            value="{{studentId}}"
+            bindinput="onStudentIdInput"
+            bindfocus="onIdFocus"
+            bindblur="onIdBlur"
+            type="number"
+            maxlength="10"
+          />
+          <text class="field-status {{validateId ? 'valid' : 'invalid'}}" wx:if="{{studentId}}">
+            {{validateId ? '✓' : '✗'}}
+          </text>
+        </view>
+        <text class="error-hint" wx:if="{{studentId && !validateId}}">学号为10位数字</text>
+
+        <view class="field {{_focusPwd ? 'focused' : ''}} {{password && password.length >= 6 ? 'valid' : ''}}">
+          <text class="field-label">密码</text>
+          <input
+            class="field-input"
+            placeholder="请设置6位以上密码"
+            value="{{password}}"
+            bindinput="onPasswordInput"
+            bindfocus="onPwdFocus"
+            bindblur="onPwdBlur"
+            password="{{!_showPwd}}"
+          />
+          <text class="eye-toggle" bindtap="togglePwd" hover-class="eye-hover">{{_showPwd ? '👁' : '🔒'}}</text>
+        </view>
+        <text class="error-hint" wx:if="{{password && password.length < 6}}">密码至少6位</text>
+      </view>
+
+      <button
+        class="submit-btn {{canSubmit ? 'active' : ''}}"
+        bindtap="doBind"
+        disabled="{{!canSubmit}}"
+        hover-class="btn-active"
+      >
+        <text>绑定并登录</text>
+        <text class="arrow">→</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 加载 -->
+  <view class="loading-mask" wx:if="{{loading}}">
+    <view class="loading-spinner">
+      <view class="spinner-ring ring-1"></view>
+      <view class="spinner-ring ring-2"></view>
+      <view class="spinner-ring ring-3"></view>
+    </view>
+    <text class="loading-text">正在登录...</text>
+  </view>
+</view>

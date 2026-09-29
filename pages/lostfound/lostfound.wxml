@@ -1,0 +1,49 @@
+<view class="page lf-page">
+  <view class="page-header">
+    <text class="page-title">失物招领</text>
+    <text class="page-subtitle">帮助寻找校园失物</text>
+  </view>
+
+  <!-- 搜索 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索失物信息..." value="{{searchKey}}" bindinput="onSearch" />
+  </view>
+
+  <!-- 分类 -->
+  <view class="tabs">
+    <view class="tab {{activeTab === 'lost' ? 'active' : ''}}" bindtap="switchTab" data-type="lost">寻物启事</view>
+    <view class="tab {{activeTab === 'found' ? 'active' : ''}}" bindtap="switchTab" data-type="found">失物招领</view>
+  </view>
+
+  <!-- 列表 -->
+  <scroll-view class="list-scroll" scroll-y enhanced="{{true}}">
+    <view class="list-wrap">
+      <view class="lf-item" wx:for="{{filteredList}}" wx:key="id">
+        <view class="lf-info" bindtap="goDetail" data-id="{{item.id}}" data-type="{{activeTab}}">
+          <view class="lf-header">
+            <text class="lf-title">{{item.title}}</text>
+            <text class="lf-time">{{item.time}}</text>
+          </view>
+          <text class="lf-desc">{{item.description}}</text>
+          <view class="lf-footer">
+            <text class="lf-tag">{{item.location}}</text>
+            <text class="lf-tag">{{item.contact}}</text>
+          </view>
+        </view>
+        <view class="lf-del" catchtap="deleteItem" data-id="{{item.id}}" data-type="{{activeTab}}" wx:if="{{item.authorId === currentStudentId}}">
+          <text>×</text>
+        </view>
+      </view>
+
+      <view class="empty-state" wx:if="{{filteredList.length === 0}}">
+        <text class="empty-icon">🔍</text>
+        <text class="empty-text">暂无相关信息</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 发布按钮 -->
+  <view class="fab-btn" bindtap="goPublish">
+    <text>+</text>
+  </view>
+</view>

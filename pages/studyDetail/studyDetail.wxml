@@ -1,0 +1,29 @@
+<view class="container" wx:if="{{item}}">
+  <view class="header">
+    <view class="type-tag tag-{{item._typeTag}}">{{item._typeText}}</view>
+    <text class="title">{{item.title}}</text>
+    <view class="meta">
+      <text class="author">{{item._author}}</text>
+      <text class="views">浏览 {{item._views}}</text>
+    </view>
+  </view>
+
+  <view class="info-section" wx:if="{{item._course || item._teacher}}">
+    <view class="info-item" wx:if="{{item._course}}">
+      <text class="label">课程：</text>
+      <text class="value">{{item._course}}</text>
+    </view>
+    <view class="info-item" wx:if="{{item._teacher}}">
+      <text class="label">教师：</text>
+      <text class="value">{{item._teacher}}</text>
+    </view>
+  </view>
+
+  <view class="content-section">
+    <text class="content">{{item.content}}</text>
+  </view>
+</view>
+
+<view class="empty" wx:else>
+  <text>内容不存在</text>
+</view>

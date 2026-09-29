@@ -1,0 +1,28 @@
+<view class="page publish-page">
+  <view class="page-header">
+    <text class="page-title">添加待办</text>
+  </view>
+
+  <view class="form-wrap">
+    <view class="form-item">
+      <text class="form-label">标题</text>
+      <input class="form-input" placeholder="请输入待办标题" value="{{title}}" bindinput="onTitle" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">截止日期</text>
+      <picker mode="date" value="{{deadline}}" bindchange="onDate">
+        <view class="form-picker">{{deadline ? deadline : '选择日期'}}</view>
+      </picker>
+    </view>
+    <view class="form-item">
+      <text class="form-label">分类</text>
+      <picker range="{{categories}}" bindchange="onCat">
+        <view class="form-picker">{{category ? category : '选择分类'}}</view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="submit-wrap">
+    <button class="btn-primary" bindtap="submit">发布</button>
+  </view>
+</view>

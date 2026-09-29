@@ -1,0 +1,94 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/campus/campus",
+    "pages/forum/forum",
+    "pages/profile/profile",
+    "pages/login/login",
+    "pages/todo/todo",
+    "pages/todoPublish/todoPublish",
+    "pages/lostfound/lostfound",
+    "pages/lostfoundDetail/lostfoundDetail",
+    "pages/lostfoundPublish/lostfoundPublish",
+    "pages/course/course",
+    "pages/newsCategory/newsCategory",
+    "pages/newsDetail/newsDetail",
+    "pages/campusMap/campusMap",
+    "pages/scenery/scenery",
+    "pages/sceneryDetail/sceneryDetail",
+    "pages/sceneryPublish/sceneryPublish",
+    "pages/voiceMap/voiceMap",
+    "pages/forumDetail/forumDetail",
+    "pages/forumPublish/forumPublish",
+    "pages/study/study",
+    "pages/studyDetail/studyDetail",
+    "pages/studyPublish/studyPublish",
+    "pages/activities/activities",
+    "pages/activityDetail/activityDetail",
+    "pages/activityPublish/activityPublish",
+    "pages/chat/chat",
+    "pages/privacy/privacy"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2E7D32",
+    "navigationBarTitleText": "云小农",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2E7D32",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icons/home.png",
+        "selectedIconPath": "images/icons/home-selected.png"
+      },
+      {
+        "pagePath": "pages/campus/campus",
+        "text": "校园",
+        "iconPath": "images/icons/campus.png",
+        "selectedIconPath": "images/icons/campus-selected.png"
+      },
+      {
+        "pagePath": "pages/forum/forum",
+        "text": "论坛",
+        "iconPath": "images/icons/chat.png",
+        "selectedIconPath": "images/icons/chat-selected.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/icons/profile.png",
+        "selectedIconPath": "images/icons/profile-selected.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于显示您在校园中的位置"
+    },
+    "scope.record": {
+      "desc": "用于录制校园留声机语音留言"
+    },
+    "scope.camera": {
+      "desc": "用于登录时拍摄头像或选择相册图片"
+    },
+    "scope.album": {
+      "desc": "用于登录时从相册选择头像图片"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation",
+    "chooseImage"
+  ],
+  "__usePrivacyCheck__": true,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "cloud": true
+}

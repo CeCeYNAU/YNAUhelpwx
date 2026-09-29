@@ -1,0 +1,39 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">校园服务</text>
+    <text class="page-subtitle">发现校园生活的更多精彩</text>
+  </view>
+
+  <scroll-view class="scroll-area" scroll-y enhanced="{{true}}">
+    <!-- 核心服务 -->
+    <view class="service-section">
+      <text class="service-group-title">核心服务</text>
+      <view class="service-grid">
+        <view class="service-card" wx:for="{{coreServices}}" wx:key="id" bindtap="goPage" data-url="{{item.url}}">
+          <view class="service-icon-box" style="background: {{item.gradient}}">
+            <text class="service-emoji">{{item.emoji}}</text>
+          </view>
+          <text class="service-name">{{item.name}}</text>
+          <text class="service-desc">{{item.desc}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 更多服务 -->
+    <view class="service-section">
+      <text class="service-group-title">更多服务</text>
+      <view class="service-list">
+        <view class="service-list-item" wx:for="{{moreServices}}" wx:key="id" bindtap="goPage" data-url="{{item.url}}">
+          <view class="service-list-icon" style="background: {{item.gradient}}">
+            <text class="service-list-emoji">{{item.emoji}}</text>
+          </view>
+          <view class="service-list-info">
+            <text class="service-list-name">{{item.name}}</text>
+            <text class="service-list-desc">{{item.desc}}</text>
+          </view>
+          <text class="service-list-arrow">→</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

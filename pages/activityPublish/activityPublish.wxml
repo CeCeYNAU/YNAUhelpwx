@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">发布活动</text>
+    <text class="page-subtitle">分享校园活动信息</text>
+  </view>
+
+  <view class="form-container">
+    <view class="form-section">
+      <text class="section-label">活动标题</text>
+      <input class="form-input" placeholder="请输入活动标题" value="{{title}}" bindinput="onTitleInput" maxlength="30" />
+      <text class="char-count">{{title.length}}/30</text>
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">活动类型</text>
+      <picker mode="selector" range="{{types}}" bindchange="onTypeChange">
+        <view class="form-picker">{{type}}</view>
+      </picker>
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">活动日期</text>
+      <picker mode="date" value="{{date}}" bindchange="onDateChange">
+        <view class="form-picker {{date ? '' : 'placeholder'}}">{{date ? date : '请选择日期'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-row">
+      <view class="form-section half">
+        <text class="section-label">开始时间</text>
+        <picker mode="time" value="{{startTime}}" bindchange="onStartTimeChange">
+          <view class="form-picker {{startTime ? '' : 'placeholder'}}">{{startTime ? startTime : '选择时间'}}</view>
+        </picker>
+      </view>
+      <view class="form-section half">
+        <text class="section-label">结束时间</text>
+        <picker mode="time" value="{{endTime}}" bindchange="onEndTimeChange">
+          <view class="form-picker {{endTime ? '' : 'placeholder'}}">{{endTime ? endTime : '选择时间'}}</view>
+        </picker>
+      </view>
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">活动地点</text>
+      <input class="form-input" placeholder="如：图书馆报告厅" value="{{location}}" bindinput="onLocationInput" />
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">主办方（选填）</text>
+      <input class="form-input" placeholder="如：学生会" value="{{organizer}}" bindinput="onOrganizerInput" />
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">人数限制（0为不限）</text>
+      <input class="form-input" type="number" placeholder="如：50" value="{{maxPeopleStr}}" bindinput="onMaxPeopleInput" />
+    </view>
+
+    <view class="form-section">
+      <text class="section-label">活动详情</text>
+      <textarea class="form-textarea" placeholder="详细描述活动内容、注意事项等...（至少10字）" value="{{content}}" bindinput="onContentInput" maxlength="1000" auto-height />
+      <text class="char-count">{{content.length}}/1000</text>
+    </view>
+
+    <button class="btn-submit" bindtap="doSubmit" disabled="{{!canSubmit}}" loading="{{loading}}">发布活动</button>
+  </view>
+</view>

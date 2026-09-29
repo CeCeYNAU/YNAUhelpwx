@@ -1,0 +1,126 @@
+<!-- 三屏滑动主页 -->
+<view class="index-page">
+  <swiper class="home-swiper" current="1" circular="{{false}}" easing-function="easeOutCubic" bindchange="onSwiperChange" indicator-dots="{{true}}" indicator-active-color="rgba(46,125,50,0.8)" indicator-color="rgba(46,125,50,0.2)">
+
+    <!-- ====== 右滑屏：校园日报 ====== -->
+    <swiper-item class="swiper-panel">
+      <view class="panel panel-news">
+        <view class="panel-header">
+          <view class="decorative-circle-1"></view>
+          <view class="decorative-circle-2"></view>
+          <text class="panel-title">校园日报</text>
+          <text class="panel-hint">校园资讯一览</text>
+        </view>
+
+        <!-- 筛选标签 -->
+        <view class="news-tags">
+          <scroll-view class="tag-scroll" scroll-x enhanced="{{true}}" show-scrollbar="{{false}}">
+            <view class="news-tag {{activeCat === index ? 'active' : ''}}" wx:for="{{newsCategories}}" wx:key="index" bindtap="onCat" data-index="{{index}}">
+              <text>{{item}}</text>
+            </view>
+          </scroll-view>
+        </view>
+
+        <!-- 新闻列表 -->
+        <scroll-view class="news-scroll" scroll-y enhanced="{{true}}" bindscrolltolower="onPullDownRefresh">
+          <view class="news-list">
+            <view class="news-card glass-card" wx:for="{{showNewsList}}" wx:key="id" bindtap="goNewsDetail" data-id="{{item.id}}">
+              <view class="news-card-header">
+                <text class="news-card-title">{{item.title}}</text>
+                <text class="news-card-tag tag-{{item.tag === '教务' ? 'green' : item.tag === '图书馆' ? 'blue' : item.tag === '就业' ? 'gold' : 'green'}}">{{item.tag}}</text>
+              </view>
+              <view class="news-card-footer">
+                <text class="news-card-time">{{item.time}}</text>
+                <text class="news-card-arrow">→</text>
+              </view>
+            </view>
+
+            <view class="empty-state" wx:if="{{showNewsList.length === 0}}">
+              <text class="empty-icon">📰</text>
+              <text class="empty-text">暂无相关资讯</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </swiper-item>
+
+    <!-- ====== 中屏：AI 助手 ====== -->
+    <swiper-item class="swiper-panel">
+      <view class="panel panel-chat">
+        <!-- 顶部用户信息栏 -->
+        <view class="ai-header">
+          <view class="decorative-circle-1"></view>
+          <view class="decorative-circle-2"></view>
+          <image class="ai-avatar" src="{{userInfo ? userInfo.avatarUrl : '/images/icons/home-selected.png'}}" mode="aspectFill" bindtap="goProfile" />
+          <view class="ai-header-text" bindtap="goProfile">
+            <text class="ai-greeting">{{greeting}}，{{userInfo ? userInfo.nickName : '同学'}}</text>
+            <text class="ai-subtitle">云南农业大学校园助手</text>
+          </view>
+        </view>
+
+        <!-- 聊天消息区 -->
+        <scroll-view class="chat-scroll" scroll-y scroll-into-view="{{scrollToView}}" scroll-with-animation enhanced="{{true}}" show-scrollbar="{{false}}">
+          <view class="msg-list">
+            <view class="msg-row {{item.role === 'user' ? 'right' : 'left'}}" wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}">
+              <view class="msg-avatar {{item.role === 'user' ? 'user-avatar' : 'ai-avatar'}}">
+                <image wx:if="{{item.role === 'assistant'}}" class="avatar-img" src="/images/icons/home-selected.png" mode="aspectFit" />
+                <image wx:else class="avatar-img" src="/images/icons/profile.png" mode="aspectFit" />
+              </view>
+              <view class="msg-bubble {{item.role === 'user' ? 'user-bubble' : 'ai-bubble'}}" bindlongpress="onCopyMessage" data-content="{{item.content}}">
+                <text class="msg-text">{{item.content}}</text>
+              </view>
+            </view>
+          </view>
+          <view id="msg-bottom"></view>
+        </scroll-view>
+
+        <!-- 快捷问题 -->
+        <view class="quick-questions">
+          <scroll-view class="quick-scroll" scroll-x enhanced="{{true}}" show-scrollbar="{{false}}">
+            <view class="quick-q" wx:for="{{quickQuestions}}" wx:key="*this" bindtap="askQuestion" data-text="{{item}}">
+              <text>{{item}}</text>
+            </view>
+          </scroll-view>
+        </view>
+
+        <!-- 输入区 -->
+        <view class="input-area">
+          <input class="chat-input" placeholder="问问云小农..." value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMessage" confirm-type="send" cursor-spacing="10" />
+          <view class="send-btn {{hasInput ? 'active' : ''}}" bindtap="sendMessage">
+            <text>发送</text>
+          </view>
+        </view>
+      </view>
+    </swiper-item>
+
+    <!-- ====== 左滑屏：多功能区 ====== -->
+    <swiper-item class="swiper-panel">
+      <view class="panel panel-func">
+        <view class="panel-header">
+          <view class="decorative-circle-1"></view>
+          <view class="decorative-circle-2"></view>
+          <text class="panel-title">多功能区</text>
+          <text class="panel-hint">探索校园服务</text>
+        </view>
+
+        <scroll-view class="func-scroll" scroll-y enhanced="{{true}}">
+          <view class="func-list">
+            <view class="func-card-lg glass-card" wx:for="{{allFuncs}}" wx:key="id" bindtap="goFunc" data-url="{{item.url}}">
+              <view class="func-icon-lg" style="background: {{item.bg}}">
+                <text class="func-emoji-lg">{{item.emoji}}</text>
+              </view>
+              <view class="func-text">
+                <text class="func-name-lg">{{item.name}}</text>
+                <text class="func-desc-lg">{{item.desc}}</text>
+              </view>
+              <view class="func-arrow">
+                <text>></text>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+    </swiper-item>
+
+  </swiper>
+</view>

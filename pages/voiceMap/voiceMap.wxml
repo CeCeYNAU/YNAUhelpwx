@@ -1,0 +1,91 @@
+<view class="page">
+  <!-- 顶部标题 -->
+  <view class="top-bar">
+    <text class="top-title">时空留言</text>
+    <view class="action-btn" bindtap="showRecord">
+      <image class="action-icon" src="/images/icons/voice-selected.png" mode="aspectFit" />
+      <text>录音打卡</text>
+    </view>
+  </view>
+
+  <!-- 地图 -->
+  <map
+    id="voiceMap"
+    class="map"
+    latitude="{{latitude}}"
+    longitude="{{longitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    enable-zoom="{{true}}"
+    enable-scroll="{{true}}"
+    show-location="{{true}}"
+    bindmarkertap="onMarkerTap"
+  />
+
+  <!-- 空状态 -->
+  <view class="empty-tip" wx:if="{{voiceList.length === 0}}">
+    <text>还没有语音留言，来做第一个打卡者吧</text>
+  </view>
+
+  <!-- 底部语音列表 -->
+  <scroll-view class="voice-list" scroll-y enhanced="{{true}}">
+    <view class="voice-item" wx:for="{{voiceList}}" wx:key="id">
+      <view class="voice-left">
+        <text class="voice-title">{{item.title}}</text>
+        <text class="voice-location">{{item.locationName}}</text>
+        <text class="voice-author">{{item.authorName}} · {{item.time}}</text>
+      </view>
+      <view class="voice-right">
+        <view class="play-btn {{playingId === item.id ? 'playing' : ''}}" bindtap="playVoice" data-id="{{item.id}}">
+          <text wx:if="{{playingId === item.id}}">⏸</text>
+          <text wx:else>▶</text>
+        </view>
+        <view class="voice-delete" wx:if="{{item.authorId}}" bindtap="deleteVoice" data-id="{{item.id}}">
+          <text>✕</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 录音面板 -->
+  <view class="record-panel" wx:if="{{showRecordPanel}}">
+    <view class="panel-mask" bindtap="hideRecord"></view>
+    <view class="panel-content">
+      <view class="panel-header">
+        <text class="panel-title">录音打卡</text>
+        <view class="panel-close" bindtap="hideRecord">✕</view>
+      </view>
+
+      <!-- 编辑模式 -->
+      <view class="edit-section" wx:if="{{showEdit}}">
+        <view class="form-group">
+          <text class="form-label">标题</text>
+          <input class="form-input" placeholder="给这条留言取个名字" value="{{editTitle}}" bindinput="onTitle" />
+        </view>
+        <view class="record-status">
+          <text>录音完成：{{formatTime(recordTime)}}</text>
+          <text class="status-dot">●</text>
+        </view>
+        <button class="btn-save" bindtap="saveVoice">保存并发布</button>
+      </view>
+
+      <!-- 录音模式 -->
+      <view class="record-section" wx:else>
+        <!-- 位置选择 -->
+        <view class="location-bar" bindtap="getLocation">
+          <text class="location-icon">{{hasLocation ? '已选择' : ''}}</text>
+          <text class="location-text">{{hasLocation ? locationName : '点击选择位置'}}</text>
+        </view>
+
+        <!-- 录音按钮 -->
+        <view class="record-circle {{isRecording ? 'recording' : ''}}" bindtap="toggleRecord">
+          <view class="circle-inner"></view>
+          <text class="record-text">{{isRecording ? '点击停止' : '按住录音'}}</text>
+          <text class="record-time" wx:if="{{isRecording}}">{{formatTime(recordTime)}}</text>
+        </view>
+
+        <text class="record-tip">最长可录制60秒</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,63 @@
+<view class="page">
+  <view class="page-header">
+    <view>
+      <text class="page-title">活动通知</text>
+      <text class="page-subtitle">校园活动一览</text>
+    </view>
+    <view class="publish-btn" bindtap="goPublish">
+      <text>发布活动</text>
+    </view>
+  </view>
+
+  <view class="filter-tabs">
+    <scroll-view class="tab-scroll" scroll-x enhanced="true" show-scrollbar="false">
+      <view class="tab {{activeTab === 'upcoming' ? 'active' : ''}}" bindtap="onCat" data-tab="upcoming">
+        <text>全部活动</text>
+      </view>
+      <view class="tab {{activeTab === 'my' ? 'active' : ''}}" bindtap="onCat" data-tab="my">
+        <text>我报名的</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="activity-list">
+    <view class="activity-card glass-card" wx:for="{{activities}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="card-header">
+        <view class="card-tag tag-{{item._typeTag}}">{{item._typeText}}</view>
+        <view class="card-status status-{{item._statusTag}}">
+          <text>{{item._statusText}}</text>
+        </view>
+      </view>
+      <view class="card-title">{{item.title}}</view>
+      <view class="card-info">
+        <view class="info-row">
+          <text class="info-label">📅</text>
+          <text>{{item.date}} {{item._startTime}}</text>
+        </view>
+        <view class="info-row" wx:if="{{item.location}}">
+          <text class="info-label">📍</text>
+          <text>{{item.location}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">👥</text>
+          <text>{{item._count}}/{{item._maxPeopleText}}</text>
+        </view>
+      </view>
+      <view class="card-footer">
+        <text class="card-author">{{item._author}}</text>
+        <view class="delete-btn" wx:if="{{item.authorId === currentStudentId}}" catchtap="onDelete" data-id="{{item.id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{activities.length === 0}}">
+      <text class="empty-icon">🔔</text>
+      <text class="empty-text">暂无活动信息</text>
+    </view>
+  </view>
+</view>
+
+<view class="fab" bindtap="goPublish">
+  <text class="fab-icon">+</text>
+</view>

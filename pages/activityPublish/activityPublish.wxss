@@ -1,0 +1,132 @@
+.page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFF3E0 0%, #F5F5F5 100%);
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+}
+
+.page-header {
+  background: linear-gradient(135deg, rgba(244,67,54,0.95) 0%, rgba(239,83,80,0.9) 60%, rgba(229,115,115,0.85) 100%);
+  padding: 48rpx 32rpx 24rpx;
+}
+
+.page-title {
+  font-size: 44rpx;
+  font-weight: 800;
+  color: #fff;
+  display: block;
+}
+
+.page-subtitle {
+  font-size: 24rpx;
+  color: rgba(255,255,255,0.75);
+  margin-top: 6rpx;
+  display: block;
+}
+
+.form-container {
+  padding: 28rpx;
+}
+
+.form-section {
+  margin-bottom: 28rpx;
+}
+
+.form-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.form-row .half {
+  flex: 1;
+}
+
+.section-label {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.form-input {
+  background: rgba(255,255,255,0.9);
+  border: 2rpx solid rgba(0,0,0,0.06);
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  background: #fff;
+  border-color: #F44336;
+  box-shadow: 0 0 0 4rpx rgba(244, 67, 54, 0.08);
+}
+
+.form-textarea {
+  background: rgba(255,255,255,0.9);
+  border: 2rpx solid rgba(0,0,0,0.06);
+  border-radius: 16rpx;
+  padding: 20rpx 24rpx;
+  font-size: 28rpx;
+  width: 100%;
+  min-height: 200rpx;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.form-textarea:focus {
+  background: #fff;
+  border-color: #F44336;
+  box-shadow: 0 0 0 4rpx rgba(244, 67, 54, 0.08);
+}
+
+.char-count {
+  font-size: 22rpx;
+  color: var(--gray);
+  text-align: right;
+  display: block;
+  margin-top: 8rpx;
+}
+
+.form-picker {
+  background: rgba(255,255,255,0.9);
+  border: 2rpx solid rgba(0,0,0,0.06);
+  border-radius: 16rpx;
+  padding: 18rpx 24rpx;
+  font-size: 28rpx;
+  color: var(--ink);
+  transition: all 0.2s ease;
+}
+
+.form-picker:active {
+  background: rgba(255,255,255,0.7);
+}
+
+.form-picker.placeholder {
+  color: var(--gray);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #F44336, #EF5350);
+  color: #fff;
+  border: none;
+  border-radius: 48rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 24rpx 0;
+  margin-top: 20rpx;
+  box-shadow: 0 6rpx 20rpx rgba(244, 67, 54, 0.3);
+  transition: all 0.2s ease;
+}
+
+.btn-submit::after { border: none; }
+
+.btn-submit[disabled] {
+  background: #ccc;
+  box-shadow: none;
+}

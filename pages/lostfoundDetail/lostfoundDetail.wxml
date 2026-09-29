@@ -1,0 +1,22 @@
+<view class="page detail-page lf-detail-page" wx:if="{{item}}">
+  <view class="detail-header" style="background: linear-gradient(135deg, #2196F3, #42A5F5)">
+    <text class="detail-title">{{item.title}}</text>
+    <text class="detail-time">{{item.time}}</text>
+  </view>
+
+  <view class="detail-body">
+    <text class="detail-text">{{item.description}}</text>
+    <view class="detail-info">
+      <text class="info-item">{{item.location}}</text>
+      <text class="info-item">{{item.contact}}</text>
+    </view>
+    <button class="call-btn" bindtap="callPhone">联系发布者</button>
+  </view>
+</view>
+
+<view class="page" wx:else>
+  <view class="empty-state">
+    <image class="empty-icon-img" src="/images/icons/empty.png" mode="aspectFit" />
+    <text class="empty-text">信息不存在</text>
+  </view>
+</view>

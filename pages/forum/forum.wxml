@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="page-header flex-between">
+    <view>
+      <text class="page-title">校园论坛</text>
+      <text class="page-subtitle">交流校园生活</text>
+    </view>
+    <view class="publish-btn" bindtap="goPublish">
+      <text>发帖</text>
+    </view>
+  </view>
+
+  <view class="filter-tabs">
+    <scroll-view class="tab-scroll" scroll-x enhanced="true" show-scrollbar="false">
+      <view class="tab {{activeTab === 'latest' ? 'active' : ''}}" bindtap="onCat" data-tab="latest">
+        <text>最新</text>
+      </view>
+      <view class="tab {{activeTab === 'hot' ? 'active' : ''}}" bindtap="onCat" data-tab="hot">
+        <text>热门</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="post-list">
+    <view class="post-card glass-card" wx:for="{{posts}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="post-header">
+        <view class="post-author">
+          <text class="author-name">{{item._author}}</text>
+          <text class="post-time">{{item.time}}</text>
+        </view>
+        <view class="post-tag tag-{{item._categoryTag}}">{{item._categoryText}}</view>
+      </view>
+      <view class="post-title">{{item.title}}</view>
+      <view class="post-content">{{item.content}}</view>
+      <view class="post-footer">
+        <view class="post-stat">
+          <text class="stat-icon">👍</text>
+          <text>{{item._likes}}</text>
+          <text class="stat-divider">|</text>
+          <text class="stat-icon">💬</text>
+          <text>{{item._commentCount}}</text>
+        </view>
+        <view class="post-actions" wx:if="{{item.authorId === currentStudentId}}">
+          <view class="delete-btn" catchtap="onDelete" data-id="{{item.id}}">
+            <text>删除</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{posts.length === 0}}">
+      <text class="empty-icon">💬</text>
+      <text class="empty-text">还没有帖子，快来发第一条吧</text>
+    </view>
+  </view>
+</view>

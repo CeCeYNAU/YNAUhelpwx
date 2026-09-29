@@ -1,0 +1,31 @@
+<view class="page chat-page">
+  <scroll-view class="chat-scroll" scroll-y scroll-into-view="{{scrollToView}}" scroll-with-animation enhanced="{{true}}" show-scrollbar="{{false}}">
+    <view class="msg-list">
+      <view class="msg-row {{item.role === 'user' ? 'right' : 'left'}}" wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}">
+        <view class="msg-avatar {{item.role === 'user' ? 'user-avatar' : 'ai-avatar'}}">
+          <image wx:if="{{item.role === 'assistant'}}" class="avatar-img" src="/images/icons/home-selected.png" mode="aspectFit" />
+          <image wx:else class="avatar-img" src="/images/icons/profile.png" mode="aspectFit" />
+        </view>
+        <view class="msg-bubble {{item.role === 'user' ? 'user-bubble' : 'ai-bubble'}}" bindlongpress="onCopyMessage" data-content="{{item.content}}">
+          <text class="msg-text">{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+    <view id="msg-bottom"></view>
+  </scroll-view>
+
+  <view class="quick-questions">
+    <scroll-view class="quick-scroll" scroll-x enhanced="{{true}}" show-scrollbar="{{false}}">
+      <view class="quick-q" wx:for="{{quickQuestions}}" wx:key="*this" bindtap="askQuestion" data-text="{{item}}">
+        <text>{{item}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="input-area">
+    <input class="chat-input" placeholder="问问云小农..." value="{{inputValue}}" bindinput="onInput" bindconfirm="sendMessage" confirm-type="send" cursor-spacing="10" />
+    <view class="send-btn {{hasInput ? 'active' : ''}}" bindtap="sendMessage">
+      <text>发送</text>
+    </view>
+  </view>
+</view>

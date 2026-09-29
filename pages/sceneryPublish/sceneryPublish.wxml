@@ -1,0 +1,40 @@
+<view class="page">
+  <view class="page-header">
+    <text class="page-title">上传照片</text>
+    <text class="page-subtitle">分享你眼中的云农美景</text>
+  </view>
+
+  <view class="form-container">
+    <!-- 图片上传 -->
+    <view class="form-section">
+      <text class="section-label">照片</text>
+      <view class="image-upload" wx:if="{{!imagePath}}" bindtap="chooseImage">
+        <text class="upload-icon">+</text>
+        <text class="upload-hint">点击上传照片</text>
+      </view>
+      <view class="image-preview" wx:else>
+        <image class="preview-img" src="{{imagePath}}" mode="aspectFill" />
+        <view class="image-remove" bindtap="removeImage">✕</view>
+      </view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="form-section">
+      <text class="section-label">标题</text>
+      <input class="form-input" placeholder="给照片取个名字吧" maxlength="30" bindinput="onTitle" />
+    </view>
+
+    <!-- 描述 -->
+    <view class="form-section">
+      <text class="section-label">描述（可选）</text>
+      <textarea class="form-textarea" placeholder="记录此刻的感受..." maxlength="200" bindinput="onDesc" />
+      <text class="char-count">{{description.length}}/200</text>
+    </view>
+
+    <!-- 提交 -->
+    <button class="btn-submit" bindtap="submit" disabled="{{submitting}}">
+      <text wx:if="{{!submitting}}">发布</text>
+      <text wx:else>发布中...</text>
+    </button>
+  </view>
+</view>

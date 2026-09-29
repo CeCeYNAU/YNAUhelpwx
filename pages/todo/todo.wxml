@@ -1,0 +1,41 @@
+<view class="page todo-page">
+  <view class="page-header">
+    <text class="page-title">我的待办</text>
+    <text class="page-subtitle">{{activeCount}} 项进行中</text>
+  </view>
+
+  <!-- 过滤器 -->
+  <view class="filter-bar">
+    <view class="filter {{filter === 'all' ? 'active' : ''}}" bindtap="setFilter" data-f="all">全部</view>
+    <view class="filter {{filter === 'active' ? 'active' : ''}}" bindtap="setFilter" data-f="active">进行中</view>
+    <view class="filter {{filter === 'done' ? 'active' : ''}}" bindtap="setFilter" data-f="done">已完成</view>
+  </view>
+
+  <!-- 列表 -->
+  <scroll-view class="list-scroll" scroll-y enhanced="{{true}}">
+    <view class="list-wrap">
+      <view class="todo-item {{item.completed ? 'done' : ''}}" wx:for="{{showList}}" wx:key="id" bindtap="toggleTodo" data-id="{{item.id}}">
+        <view class="check {{item.completed ? 'checked' : ''}}">
+          <text wx:if="{{item.completed}}">✓</text>
+        </view>
+        <view class="todo-info">
+          <text class="todo-title {{item.completed ? 'completed' : ''}}">{{item.title}}</text>
+          <text class="todo-meta" wx:if="{{item.deadline}}">{{item.deadline}}</text>
+        </view>
+        <view class="delete-btn" catchtap="deleteTodo" data-id="{{item.id}}">
+          <text>×</text>
+        </view>
+      </view>
+
+      <view class="empty-state" wx:if="{{showList.length === 0}}">
+        <text class="empty-icon">📋</text>
+        <text class="empty-text">暂无待办</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 添加按钮 -->
+  <view class="add-btn" bindtap="goAdd">
+    <text>+</text>
+  </view>
+</view>

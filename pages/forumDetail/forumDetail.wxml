@@ -1,0 +1,46 @@
+<view class="page" wx:if="{{post}}">
+  <view class="post-card glass-card">
+    <view class="post-header">
+      <view class="author-info">
+        <text class="author-name">{{post._author}}</text>
+        <text class="post-time">{{post.time}}</text>
+      </view>
+      <view class="post-tag tag-{{post._categoryTag}}">{{post._categoryText}}</view>
+    </view>
+    <view class="post-title">{{post.title}}</view>
+    <view class="post-body">{{post.content}}</view>
+    <view class="post-stats">
+      <view class="stat-btn" bindtap="toggleLike">
+        <text class="stat-icon"></text>
+        <text>{{post._likes}}</text>
+      </view>
+      <view class="stat-btn">
+        <text class="stat-icon">💬</text>
+        <text>{{post._commentCount}} 评论</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="comment-section">
+    <text class="section-title">评论</text>
+    <view class="comment-list">
+      <view class="comment-card glass-card" wx:for="{{post.comments}}" wx:key="id">
+        <view class="comment-header">
+          <text class="comment-author">{{item._author}}</text>
+          <text class="comment-time">{{item.time}}</text>
+        </view>
+        <view class="comment-body">{{item.content}}</view>
+      </view>
+      <view class="empty-state" wx:if="{{post._commentCount === 0}}">
+        <text class="empty-text">暂无评论，快来抢沙发</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="comment-input-area">
+    <input class="comment-input" placeholder="写下你的评论..." value="{{commentInput}}" bindinput="onCommentInput" bindconfirm="addComment" confirm-type="send" />
+    <view class="comment-send" bindtap="addComment">
+      <text>发送</text>
+    </view>
+  </view>
+</view>

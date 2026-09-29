@@ -1,0 +1,14 @@
+<view class="page detail-page">
+  <view class="detail-header" wx:if="{{item}}">
+    <view class="detail-tag" wx:if="{{item.tag}}">{{item.tag}}</view>
+    <text class="detail-title">{{item.title}}</text>
+    <text class="detail-time">{{item.time}}</text>
+  </view>
+  <view class="detail-body" wx:if="{{item}}">
+    <text class="detail-text">{{item.content}}</text>
+  </view>
+  <view class="empty-state" wx:else>
+    <image class="empty-icon-img" src="/images/icons/empty.png" mode="aspectFit" />
+    <text class="empty-text">信息不存在</text>
+  </view>
+</view>

@@ -1,0 +1,109 @@
+<view class="page dark-page">
+  <!-- 顶部信息栏 -->
+  <view class="top-bar dark-bar">
+    <view class="bar-left">
+      <text class="bar-title">时空交集</text>
+      <text class="bar-subtitle">Time-Space Intersection</text>
+    </view>
+    <view class="top-actions">
+      <view class="action-btn dark-btn" bindtap="toggleView">
+        <text>{{currentView === 'map' ? '列表' : '地图'}}</text>
+      </view>
+      <view class="action-btn dark-btn" bindtap="backToCenter">
+        <text>中心</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计横幅 -->
+  <view class="stats-banner">
+    <view class="stat-item">
+      <text class="stat-num glow">{{totalCount}}</text>
+      <text class="stat-label">今日交集人次</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num glow">{{intersectionRecords.length}}</text>
+      <text class="stat-label">交集地点</text>
+    </view>
+    <view class="stat-divider"></view>
+    <view class="stat-item">
+      <text class="stat-num glow-sm">匿名</text>
+      <text class="stat-label">隐私保护</text>
+    </view>
+  </view>
+
+  <!-- 地图视图 -->
+  <view class="map-container" wx:if="{{currentView === 'map'}}">
+    <map
+      id="campusMap"
+      class="map dark-map"
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      scale="{{scale}}"
+      markers="{{markers}}"
+      enable-zoom="{{true}}"
+      enable-scroll="{{true}}"
+      show-location="{{true}}"
+      satellite="{{enableSatellite}}"
+      bindmarkertap="onMarkerTap"
+    />
+    <view class="map-overlay"></view>
+  </view>
+
+  <!-- 交集列表视图 -->
+  <scroll-view class="intersections-scroll" scroll-y enhanced="{{true}}" wx:if="{{currentView === 'list'}}">
+    <view class="intersections-list">
+      <view class="inter-card" wx:for="{{intersectionRecords}}" wx:key="id" bindtap="onInterTap" data-index="{{index}}">
+        <view class="inter-dot" style="background: {{item.color}}40; border-color: {{item.color}};">
+          <view class="dot-pulse" style="background: {{item.color}}; box-shadow: 0 0 8rpx {{item.color}};"></view>
+        </view>
+        <view class="inter-content">
+          <view class="inter-header">
+            <text class="inter-place">{{item.placeName}}</text>
+            <text class="inter-count" style="color: {{item.color}};">{{item.count}}人</text>
+          </view>
+          <text class="inter-message">{{item.message}}</text>
+          <view class="inter-footer">
+            <text class="inter-time">{{item.timeSlot}}</text>
+            <text class="inter-cat">{{item.category}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-state" wx:if="{{intersectionRecords.length === 0}}">
+        <text class="empty-icon">🌌</text>
+        <text class="empty-text">今日暂无交集记录</text>
+        <text class="empty-hint">去校园里走走吧，也许会有奇遇</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 交集详情卡片（地图模式下点击marker弹出） -->
+  <view class="detail-card dark-card" wx:if="{{showCard}}" catchtap="closeCard">
+    <view class="card-content dark-card-content" catchtap="stop">
+      <view class="card-header">
+        <view class="card-tag glow-tag" style="background: {{selectedPlace.color}}20; color: {{selectedPlace.color}};">{{selectedPlace.category}}</view>
+        <text class="card-title dark-title">{{selectedPlace.title}}</text>
+        <view class="card-close dark-close" bindtap="closeCard">x</view>
+      </view>
+      <text class="card-desc dark-desc">{{selectedPlace.desc}}</text>
+      <view class="inter-info-section" wx:if="{{selectedPlace.count}}">
+        <text class="inter-info-label">今日交集</text>
+        <text class="inter-info-count" style="color: {{selectedPlace.color}};">{{selectedPlace.count}}人次</text>
+        <text class="inter-info-time">{{selectedPlace.timeSlot}}</text>
+      </view>
+      <button class="btn-navigate dark-nav-btn" bindtap="navigateToPlace">
+        <image class="nav-icon-img" src="/images/icons/map-selected.png" mode="aspectFit" />
+        <text>导航到此</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 底部标记点列表（地图模式） -->
+  <scroll-view class="bottom-list dark-chips" scroll-x enhanced="{{true}}" wx:if="{{currentView === 'map'}}">
+    <view class="marker-chip dark-chip" wx:for="{{markers}}" wx:key="id" bindtap="onMarkerTap" data-id="{{item.id}}" style="border-color: {{item.color}}40;">
+      <view class="chip-dot" style="background: {{item.color}}; box-shadow: 0 0 8rpx {{item.color}};"></view>
+      <text>{{item.title}}</text>
+    </view>
+  </scroll-view>
+</view>
